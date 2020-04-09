@@ -53,20 +53,32 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
         create_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openSignup();
             }
         });
+    }
 
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(mAuth.getCurrentUser() != null){
+            openListActivity();
+        }
     }
 
     public void openSignup(){
         Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+        startActivity(intent);
+    }
+
+    public void openListActivity(){
+        Intent intent = new Intent(MainActivity.this, ListActivity.class);
+        finish();
         startActivity(intent);
     }
 
@@ -86,26 +98,12 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             //for me:
-                            Toast.makeText(MainActivity.this,"user is signed in", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(MainActivity.this,"user is signed in", Toast.LENGTH_LONG).show();
                             //
                             Log.d(this.getClass().getName(),"SUCCESS - user is logged in");
                             create_account.setEnabled(true);
                             login.setEnabled(true);
-                            //TODO : go to list activity!
-
-                            //
-                    /*
-                    Item item = new Item("bye");
-                    DocumentReference item_ref = db.collection("users").document(mAuth.getCurrentUser().getEmail()).collection("items").document();
-                    item_ref.set(item).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(MainActivity.this,"SUCCESS - item added", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });*/
-                            //
+                            openListActivity();
 
                         }
                         else{
@@ -121,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
-        
+
     }
 
 
