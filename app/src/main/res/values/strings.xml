@@ -9,4 +9,5 @@
     <string name="signup_button">SIGN UP</string>
     <string name="logout_button">LOGOUT</string>
     <string name="insert_button">INSERT</string>
+    <string name="insert_item">Type Item Description</string>
 </resources>

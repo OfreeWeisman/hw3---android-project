@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:background="@color/secondaryColor"
+        android:background="@drawable/round_button"
         android:text="@string/signup_button"
         />
 
